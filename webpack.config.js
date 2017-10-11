@@ -3,11 +3,11 @@ var path = require('path');
 module.exports = {
 
     entry: {
-        classportal: "./ts/App.ts"
+        classportal: "./src/ts/App.ts"
     },
     output: {
-        path: path.resolve(__dirname, "./dist/"),
-        publicPath: path.resolve(__dirname, "./public/"),
+        path: path.resolve(__dirname, "./build/dist/"),
+        publicPath: path.resolve(__dirname, ".build/public/"),
         filename: "classportal.js"
     },
 

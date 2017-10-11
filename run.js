@@ -17,13 +17,13 @@ app.use(function(req, res, next) {
   next();
 });
 
-console.log('YEP', path.resolve(__dirname, './public'))
-app.use('/', express.static(path.resolve(__dirname, './')));
-app.use('/public/', express.static(path.resolve(__dirname, './public')));
-app.use('/dist/', express.static(path.resolve(__dirname, './dist')));
-app.use('./lib/', express.static(path.resolve(__dirname, './lib')));
+app.use('/', express.static(path.resolve(__dirname, './app/build/')));
+app.use('/public/', express.static(path.resolve(__dirname, './build/public')));
+app.use('/html/', express.static(path.resolve(__dirname, './app/html')));
+app.use('/dist/', express.static(path.resolve(__dirname, './app/build/dist')));
+app.use('/lib/', express.static(path.resolve(__dirname, './app/lib')));
 app.get('/', function(req, res) {
-  res.sendFile(path.resolve(__dirname, './index.html'));
+  res.sendFile(path.resolve(__dirname, './app/index.html'));
 });
 
 let sslCert = fs.readFileSync(config.sslCertPath, 'utf8');
