@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const path = require('path');
 const http = require('http');
 const https = require('https');
-config = require('./.env');
+const config = require('./config');
 
 // configure express app
 app.use(function(req, res, next) {
@@ -16,17 +17,18 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(express.static('public'));
-app.get('*', function(req, res) {
+console.log('YEP', path.resolve(__dirname, './public'))
+app.use('/', express.static(path.resolve(__dirname, './')));
+app.use('/public/', express.static(path.resolve(__dirname, './public')));
+app.use('/dist/', express.static(path.resolve(__dirname, './dist')));
+app.use('./lib/', express.static(path.resolve(__dirname, './lib')));
+app.get('/', function(req, res) {
   res.sendFile(path.resolve(__dirname, './index.html'));
 });
 
 let sslCert = fs.readFileSync(config.sslCertPath, 'utf8');
 let sslKey = fs.readFileSync(config.sslKeyPath, 'utf8');
 let sslIntCert = fs.readFileSync(config.sslIntCert, 'utf8');
-console.log('localHost', config.localHost);
-console.log('apiAddress', config.apiAddress);
-console.log('appPath', config.appPath);
 
 // create server SSL credentials
 let options = { cert: sslCert, key: sslKey, ca: sslIntCert };

@@ -7,7 +7,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, "./dist/"),
-        filename: "[name].js"
+        publicPath: path.resolve(__dirname, "./public/"),
+        filename: "classportal.js"
     },
 
     // Enable sourcemaps for debugging webpack's output.
