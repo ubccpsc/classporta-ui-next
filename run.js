@@ -6,6 +6,8 @@ const http = require('http');
 const https = require('https');
 const config = require('./config');
 
+const PORT = process.env.NODE_ENV === 'production' ? 3000 : 80;
+
 // configure express app
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -49,7 +51,7 @@ httpServer.listen(80, function(err) {
   console.log('Started server in production mode on 80 for redirects to 443');
 });
 
-httpsServer.listen(443, function(err) {
+httpsServer.listen(PORT, function(err) {
   if (err) { console.log('Error: ' + err)}
   console.log('Started server in production mode on 443');
 });
